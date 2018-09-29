@@ -1,0 +1,37 @@
+<div class="alert alert-warning" *ngIf = "msg.length" >
+	{{msg}}
+</div>
+<div class="jumbotron col-8 center">
+	<div class="table-responsive-sm">
+		<form class="form-inline">
+			<img src="assets/img/search.png">
+			<input #nomeProcurado (keyup)="0" class="form-control maior" type="search" placeholder="Pesquisar">
+		</form>
+		<table class="table-striped col-12">
+			<thead class="table table-dark">
+				<tr>
+
+					<th > Nome </th>
+					<th > Telefone </th>
+					<!--<th class="medio"> Tipo </th>
+					<th class="medio"> Operadora </th> -->
+					<th > Alterar</th>
+					<th > Excluir </th>
+				</tr>
+			</thead>
+			<tbody>				
+				<tr *ngFor = "let contato of contatos | filtroPorNome: nomeProcurado.value" >
+					<td > {{contato.nome}} </td>
+					<td > {{contato.telefone}} </td>
+					<!--<td class="medio"> {{contato.tipo}} </td>
+					<td class="medio"> {{contato.operadora}} </td> -->
+					<td > <a  [routerLink]="['/editar', contato.id]" ><img src="assets/img/edit.png"> </a></td>
+					<td > <a (click)=remover(contato)><img src="assets/img/del.png"> </a> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="alert alert-warning" *ngIf = "msg.length" >
+		{{msg}}
+	</div>

@@ -1,0 +1,54 @@
+<div class="jumbotron col-8 center">
+	<h1> Novo Contato </h1>
+		<form [formGroup]="meuForm" (submit) = "cadastrar($event)" class="center">
+			 <div class="form-group row">
+			 	<div class="col-1"> Nome: </div>			 
+				<div class="col-6">	
+					<input formControlName="nome"  [(ngModel)]="contato.nome"  name = "nome"
+					type="text" class="form-control" placeholder="Nome do Contato"> 
+				</div>	
+				<div class="alert alert-danger" 
+					*ngIf="meuForm.get('nome').invalid && (meuForm.get('nome').dirty || meuForm.get('nome').touched)" >
+					<span *ngIf="meuForm.get('nome').hasError('required')">
+						O Nome é obrigatório!
+					</span>
+					<span *ngIf="meuForm.get('nome').hasError('minlength')">
+						O nome deve ter no minímo 3 caracteres
+					</span>
+					<span *ngIf="meuForm.get('nome').hasError('maxlength')">
+						O nome deve ter no máximo 20 caracteres
+					</span>
+				</div>
+			</div>
+			
+			 <div class="form-group row">	
+			 	<div class="col-1">	Telefone:  </div> 
+				<div class="col-6">	
+					<input formControlName="telefone" [(ngModel)]="contato.telefone" name = "telefone"
+					type="text" class="form-control" placeholder="(xx) xxxxxxxxx"> 
+				</div>
+				<div class="alert alert-danger" 
+					*ngIf="meuForm.get('telefone').invalid && (meuForm.get('telefone').dirty || meuForm.get('telefone').touched)" >
+					<span *ngIf="meuForm.get('telefone').hasError('required')">
+						O Telefone é obrigatório!
+					</span>
+					<span *ngIf="meuForm.get('telefone').hasError('minlength')">
+						O telefone deve ter no minímo 3 caracteres
+					</span>
+					<span *ngIf="meuForm.get('telefone').hasError('maxlength')">
+						O telefone deve ter no máximo 14 caracteres
+					</span>
+				</div>
+			</div>
+			
+			<app-tipo formControlName="tipo" name ="tipo" [(ngModel)]="contato.tipo" ngDefaultControl> </app-tipo> 
+
+			<app-operadora formControlName="operadora" [(ngModel)]="contato.operadora" name="operadora" ngDefaultControl> </app-operadora>
+			<button type="submit" class="btn btn-primary" [disabled]="meuForm.invalid"> Salvar </button> 
+
+		</form>
+	<div class="alert alert-warning" *ngIf = "msg.length" >
+		{{msg}}
+	</div>
+
+</div>
